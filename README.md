@@ -4,17 +4,22 @@
 3월 둘째주 5-11
 
 <table>
+  <tr>
+    <th>날짜</th>
+    <th>알고리즘</th>
+    <th>FE</th>
+  </tr>
 <tr>
 <th>
 <p>23.3.11.토</p>
 </th>
 <td>
 <ul>
-<h3>알고리즘</h3>
 <li>평범한배낭 다시풀기</li>
 <li>안녕 풀기</li>
-<h3>FE</h3>
-<li>react 기초의 기초의 기초</li>
-<td>
+  </td>
+  <td>
+    <li>react 기초의 기초의 기초</li>
+  </td>
 </tr>
 </table>
