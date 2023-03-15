@@ -52,4 +52,19 @@
     <li></li>
   </td>
 </tr>
+
+<tr>
+  <th>
+    <p>23.3.16.목</p>
+  </th>
+  <td>
+    <ul>
+    <li></li>
+    <li>벽 부수고 이동하기</li>
+    <ul>
+  </td>
+  <td>
+    <li></li>
+  </td>
+</tr>
 </table>
