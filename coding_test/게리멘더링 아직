@@ -1,0 +1,138 @@
+/*17471 게리맨더링
+* 그래프에서 선거구 두개로 나누고 두 집단의 수 차이가 가장 적은거 찾기
+* 2차원행렬로 인접리스트만들기
+*/
+#include <iostream>
+#include <vector>
+#include <deque>
+#include <cstdlib>
+using namespace std;
+
+int n,ans;
+vector<int> vals;
+vector<int> connect[11];
+
+
+void input() {
+	cin >> n;
+	int j = n;
+	while (j--) {
+		vals.push_back(0);
+		int val;
+		cin >> val;
+		vals.push_back(val);
+	}
+	for (int i = 1; i <= n; i++) {
+		int m;
+		cin >> m;
+		while (m--) {
+			int k;
+			cin >> k;
+			connect[i].push_back(k);
+		}
+	}
+	for (int i = 1; i <= n; i++) {
+		cout << i << " : ";
+		for (int j = 0; j < connect[i].size(); j++) {
+			cout << connect[i][j] << " ";
+		}
+		cout << "\n";
+	}
+	return;
+}
+
+bool isexist(vector<int> v) {
+	if (v.size() == 0) return false;
+	else return true;
+}
+
+bool isconnect(vector<int> v) {
+	deque<int> q;
+	bool visited[11] = { 0 };//방문체크
+	q.push_back(v[0]);
+	visited[v[0]] = 1;
+	while (!q.empty()) {
+		int idx = q.front();
+		q.pop_front();
+		for (int i = 0; i < connect[idx].size(); i++) {
+			if (visited[idx] == false) {
+				q.push_back(connect[idx][i]);
+				visited[connect[idx][i]] = 1;
+			}
+		}
+	}
+	for (int i = 0; i < n; i++) {
+		if (visited[v[i]] == 0) return false;
+	}
+	return true;
+
+}
+
+void com(int st) {//조합 구현
+	vector<int> com1;
+	vector<int> com2;
+	int cnt1, cnt2;
+	int firstcnt = 1;
+	bool ch[11] = { 0 };
+	while (firstcnt >= 1&& firstcnt<=n) {
+		//종료조건
+		if (com1.size() == firstcnt) {
+			for (int i = 0; vals.size(); i++) {
+				if (ch[i] == 0) {
+					com2.push_back(i);
+				}
+			}
+			if (isexist(com1) && isexist(com2)) {
+				if (isconnect(com1) && isconnect(com2)) {
+					cnt1 = 0;
+					cnt2 = 0;
+					for (int i = 0; i < com1.size(); i++) {
+						cnt1 += vals[com1[i]];
+					}
+					for (int i = 0; i < com2.size(); i++) {
+						cnt2 += vals[com2[i]];
+					}
+					int tmp = abs(cnt1 - cnt2);
+					if (ans > tmp) {
+						ans = tmp;
+					}
+					return;
+				}
+				else return;
+			}
+			else return;
+		}//조합만들기
+		else {
+			for (int i = st; i <= n; i++) {
+				com1.push_back(i);
+				ch[i] = 1;
+				com(st + 1);
+				com1.pop_back();
+				ch[i] = 0;
+			}
+		}
+		firstcnt++;
+	}
+}
+
+void slove() {
+	ans = 10000;
+	com(1);
+	return;
+}
+void show() {
+	cout << ans;
+	return;
+}
+
+int main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+
+	input();
+	slove();
+	show();
+
+	return 0;
+}
